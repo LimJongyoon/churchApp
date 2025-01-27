@@ -1,0 +1,25 @@
+{
+    "announcements": [
+      {
+        "title": "첫 번째 공지",
+        "content": "예배 시간이 변경되었습니다."
+      },
+      {
+        "title": "두 번째 공지",
+        "content": "이번 주 토요일 청년부 모임이 있습니다."
+      }
+    ],
+    "tasks": {
+      "2025-01-01": {
+        "song": true,
+        "prayer": false,
+        "qt": true
+      },
+      "2025-01-02": {
+        "song": true,
+        "prayer": true,
+        "qt": true
+      }
+    }
+  }
+  

@@ -1,3 +1,4 @@
+//app.js
 const loginSection = document.getElementById("login");
 const homeSection = document.getElementById("home");
 const tasksSection = document.getElementById("tasks");
@@ -51,26 +52,50 @@ loginBtn.addEventListener("click", () => {
 function generateCalendar() {
   calendar.innerHTML = ""; // Clear existing calendar
   const daysInMonth = 30; // Example month with 30 days
-  const today = new Date().getDate();
 
   for (let day = 1; day <= daysInMonth; day++) {
     const dayButton = document.createElement("button");
     dayButton.textContent = day;
-    if (day === today) {
-      dayButton.classList.add("today");
-    }
+    dayButton.classList.add("calendar-day");
     dayButton.addEventListener("click", () => {
       taskChecklist.style.display = "flex";
+      taskChecklist.dataset.selectedDay = day; // Store the selected day
     });
     calendar.appendChild(dayButton);
   }
 }
 
 saveBtn.addEventListener("click", () => {
-  alert("숙제가 저장되었습니다!");
-  taskChecklist.style.display = "none";
-  const selectedDay = document.querySelector(".calendar button.today");
-  if (selectedDay) {
-    selectedDay.classList.add("completed");
+  const selectedDay = taskChecklist.dataset.selectedDay; // Get selected day
+  if (!selectedDay) return;
+
+  // Count completed tasks
+  const completedTasks = Array.from(taskChecklist.querySelectorAll(".task-card.completed")).length;
+
+  // Find the corresponding day button
+  const dayButton = Array.from(calendar.children).find(
+    (btn) => btn.textContent === selectedDay
+  );
+
+  // Apply class based on completed tasks
+  if (completedTasks === 3) {
+    dayButton.classList.add("all-completed");
+    dayButton.classList.remove("partially-completed", "not-completed");
+  } else if (completedTasks > 0) {
+    dayButton.classList.add("partially-completed");
+    dayButton.classList.remove("all-completed", "not-completed");
+  } else {
+    dayButton.classList.add("not-completed");
+    dayButton.classList.remove("all-completed", "partially-completed");
   }
+
+  taskChecklist.style.display = "none"; // Hide the checklist
 });
+
+// Task card toggle functionality
+document.querySelectorAll(".task-card").forEach((card) => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("completed");
+  });
+});
+

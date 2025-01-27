@@ -1,8 +1,9 @@
+    <!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>사랑하는 우리교회</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,23 +15,29 @@
   <main>
     <!-- Login Section -->
     <section id="login" class="section active">
-      <h2>로그인</h2>
-      <div class="input-group">
-        <label for="user-name">이름</label>
-        <input type="text" id="user-name" placeholder="이름 입력" />
-      </div>
-      <div class="input-group">
-        <label for="user-birth">생년월일</label>
-        <input type="text" id="user-birth" placeholder="예: 190906" />
-      </div>
-      <div class="input-group">
-        <label>
-          <input type="checkbox" id="remember-me" checked /> 로그인 정보 기억하기
-        </label>
-      </div>
-      <div class="button-group">
-        <button id="login-btn">로그인</button>
-      </div>
+        <h2>로그인</h2>
+        
+        <div class="input-group">
+            <label for="user-name">이름</label>
+            <input type="text" id="user-name" class="input-field" placeholder="이름 입력" />
+        </div>
+
+        <div class="input-group">
+            <label for="user-birth">생년월일</label>
+            <input type="text" id="user-birth" class="input-field" placeholder="예: 190906" />
+        </div>
+
+        <div class="input-group remember-me">
+            <label for="remember-me" class="checkbox-label">
+            <input type="checkbox" id="remember-me" class="checkbox-input" checked />
+            <span class="custom-checkbox"></span>
+            로그인 정보 기억하기
+            </label>
+        </div>
+
+        <div class="button-group">
+            <button id="login-btn" class="login-button">로그인</button>
+        </div>
     </section>
 
     <!-- Home Section -->
@@ -51,22 +58,26 @@
         <div class="calendar" id="calendar">
           <!-- Days will be dynamically generated here -->
         </div>
-
-        <div id="task-checklist" class="task-checklist" style="display:none;">
-          <div class="task-card" id="task-song">
-            <img src="icons/song.png" alt="암송">
-            <p>암송</p>
+        <div id="task-checklist" class="task-checklist">
+            <!-- 가로 배열된 숙제 버튼 -->
+            <div class="task-cards">
+              <div class="task-card" id="task-song">
+                <img src="icons/song.png" alt="암송">
+                <p>암송</p>
+              </div>
+              <div class="task-card" id="task-prayer">
+                <img src="icons/pray.png" alt="기도">
+                <p>기도</p>
+              </div>
+              <div class="task-card" id="task-qt">
+                <img src="icons/QT.png" alt="큐티">
+                <p>큐티</p>
+              </div>
+            </div>
+          
+            <!-- 저장 버튼 -->
+            <button id="save-btn">저장</button>
           </div>
-          <div class="task-card" id="task-prayer">
-            <img src="icons/pray.png" alt="기도">
-            <p>기도</p>
-          </div>
-          <div class="task-card" id="task-qt">
-            <img src="icons/QT.png" alt="큐티">
-            <p>큐티</p>
-          </div>
-          <button id="save-btn">저장</button>
-        </div>
       </div>
     </section>
   </main>
