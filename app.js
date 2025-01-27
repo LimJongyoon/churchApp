@@ -39,7 +39,7 @@ loginBtn.addEventListener("click", () => {
     localStorage.setItem("userBirth", userBirth);
   }
 
-  if (userName === "admin" && userBirth === "admin") {
+  if (userName === "김가정" && userBirth === "admin") {
     window.location.href = "admin.html";
   } else {
     alert(`${userName}님, 환영합니다!`);
