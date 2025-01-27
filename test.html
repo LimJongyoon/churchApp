@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사랑하는 우리교회</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    사랑하는 우리교회
+  </header>
+  <main>
+    <!-- Login Section -->
+    <section id="login" class="section active">
+      <h2>로그인</h2>
+      <div class="input-group">
+        <label for="user-name">이름</label>
+        <input type="text" id="user-name" placeholder="이름 입력" />
+      </div>
+      <div class="input-group">
+        <label for="user-birth">생년월일</label>
+        <input type="text" id="user-birth" placeholder="예: 190906" />
+      </div>
+      <div class="input-group">
+        <label>
+          <input type="checkbox" id="remember-me" /> 로그인 정보 기억하기
+        </label>
+      </div>
+      <div class="button-group">
+        <button id="login-btn">로그인</button>
+      </div>
+    </section>
+
+    <!-- Other sections -->
+    <!-- Add other sections here -->
+  </main>
+
+  <footer class="footer">
+    <button id="home-btn">홈</button>
+    <button id="tasks-btn">숙제 체크</button>
+  </footer>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
