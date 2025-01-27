@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사랑하는 우리교회</title>
+  <style>
+    /* Reset and basic styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #4CAF50;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .footer button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      font-size: 1rem;
+      color: white;
+      background-color: #66bb6a;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .footer button.active {
+      background-color: #388e3c;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .calendar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .calendar button {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .calendar button.completed {
+      background-color: #66bb6a;
+      color: white;
+    }
+
+    .task-checklist label {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .task-checklist input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>사랑하는 우리교회</h1>
+  </header>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="section active">
+      <h2>공지사항</h2>
+      <p>여기에 공지사항이 표시됩니다.</p>
+      <h2>추천 유튜브</h2>
+      <a href="#" target="_blank">유튜브 링크 1</a>
+    </section>
+
+    <!-- Task Section -->
+    <section id="tasks" class="section">
+      <h2>숙제 체크</h2>
+      <div>
+        <label for="user-name">이름:</label>
+        <input type="text" id="user-name" placeholder="이름 입력">
+
+        <label for="user-birth">생년월일:</label>
+        <input type="text" id="user-birth" placeholder="예: 190906">
+
+        <button id="login-btn">로그인</button>
+      </div>
+
+      <div id="calendar-container" style="display:none;">
+        <h3>달력</h3>
+        <div class="calendar">
+          <!-- Days will be generated dynamically here -->
+        </div>
+
+        <div id="task-checklist" class="task-checklist" style="display:none;">
+          <h3>숙제 항목</h3>
+          <label><input type="checkbox" id="task-song"> 암송 (노래)</label>
+          <label><input type="checkbox" id="task-prayer"> 삶에서 하는 기도</label>
+          <label><input type="checkbox" id="task-qt"> 큐티</label>
+          <button id="save-btn">저장</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <button id="home-btn" class="active">홈</button>
+    <button id="tasks-btn">숙제 체크</button>
+  </footer>
+
+  <script>
+    // Element references
+    const homeSection = document.getElementById("home");
+    const tasksSection = document.getElementById("tasks");
+    const homeBtn = document.getElementById("home-btn");
+    const tasksBtn = document.getElementById("tasks-btn");
+    const loginBtn = document.getElementById("login-btn");
+    const calendarContainer = document.getElementById("calendar-container");
+    const taskChecklist = document.getElementById("task-checklist");
+    const saveBtn = document.getElementById("save-btn");
+
+    // Footer navigation
+    homeBtn.addEventListener("click", () => {
+      homeSection.classList.add("active");
+      tasksSection.classList.remove("active");
+      homeBtn.classList.add("active");
+      tasksBtn.classList.remove("active");
+    });
+
+    tasksBtn.addEventListener("click", () => {
+      homeSection.classList.remove("active");
+      tasksSection.classList.add("active");
+      homeBtn.classList.remove("active");
+      tasksBtn.classList.add("active");
+    });
+
+    // Login functionality
+    loginBtn.addEventListener("click", () => {
+      const userName = document.getElementById("user-name").value;
+      const userBirth = document.getElementById("user-birth").value;
+
+      if (userName && userBirth) {
+        calendarContainer.style.display = "block";
+        alert(`${userName}님, 환영합니다!`);
+
+        // Generate calendar dynamically (for simplicity, 30 days)
+        const calendar = document.querySelector(".calendar");
+        calendar.innerHTML = ""; // Clear existing calendar
+        for (let i = 1; i <= 30; i++) {
+          const dayBtn = document.createElement("button");
+          dayBtn.textContent = i;
+          dayBtn.addEventListener("click", () => {
+            taskChecklist.style.display = "block";
+          });
+          calendar.appendChild(dayBtn);
+        }
+      } else {
+        alert("이름과 생년월일을 입력해주세요.");
+      }
+    });
+
+    // Save tasks
+    saveBtn.addEventListener("click", () => {
+      alert("숙제가 저장되었습니다!");
+      taskChecklist.style.display = "none";
+    });
+  </script>
+</body>
+</html>

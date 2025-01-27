@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사랑하는 우리교회 - 관리자</title>
+  <style>
+    /* Reset and basic styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #4CAF50;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .footer button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      font-size: 1rem;
+      color: white;
+      background-color: #66bb6a;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .footer button.active {
+      background-color: #388e3c;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .announcement-form, .user-stats {
+      margin-top: 20px;
+    }
+
+    .announcement-form input, .announcement-form textarea, .announcement-form button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .user-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .user-stats .user {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>사랑하는 우리교회 - 관리자</h1>
+  </header>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="section active">
+      <h2>공지 관리</h2>
+      <form class="announcement-form">
+        <input type="text" id="announcement-title" placeholder="공지 제목" />
+        <textarea id="announcement-content" placeholder="공지 내용"></textarea>
+        <button id="post-announcement">공지 게시</button>
+      </form>
+    </section>
+
+    <!-- User Stats Section -->
+    <section id="user-stats" class="section">
+      <h2>사용자 숙제 현황</h2>
+      <div class="user-stats" id="stats-container">
+        <!-- User stats will be dynamically populated -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <button id="home-btn" class="active">공지 관리</button>
+    <button id="stats-btn">숙제 현황</button>
+  </footer>
+
+  <script>
+    // Element references
+    const homeSection = document.getElementById("home");
+    const statsSection = document.getElementById("user-stats");
+    const homeBtn = document.getElementById("home-btn");
+    const statsBtn = document.getElementById("stats-btn");
+    const postAnnouncementBtn = document.getElementById("post-announcement");
+    const statsContainer = document.getElementById("stats-container");
+
+    // Footer navigation
+    homeBtn.addEventListener("click", () => {
+      homeSection.classList.add("active");
+      statsSection.classList.remove("active");
+      homeBtn.classList.add("active");
+      statsBtn.classList.remove("active");
+    });
+
+    statsBtn.addEventListener("click", () => {
+      homeSection.classList.remove("active");
+      statsSection.classList.add("active");
+      homeBtn.classList.remove("active");
+      statsBtn.classList.add("active");
+
+      // Load user stats dynamically (mocked for now)
+      statsContainer.innerHTML = "";
+      const mockUsers = [
+        { name: "홍길동", completed: { song: 25, prayer: 27, qt: 26 } },
+        { name: "김철수", completed: { song: 28, prayer: 29, qt: 30 } },
+        { name: "박영희", completed: { song: 20, prayer: 22, qt: 25 } }
+      ];
+
+      mockUsers.forEach(user => {
+        const userDiv = document.createElement("div");
+        userDiv.classList.add("user");
+        userDiv.innerHTML = `
+          <h3>${user.name}</h3>
+          <p>암송: ${user.completed.song}회</p>
+          <p>삶에서 하는 기도: ${user.completed.prayer}회</p>
+          <p>큐티: ${user.completed.qt}회</p>
+        `;
+        statsContainer.appendChild(userDiv);
+      });
+    });
+
+    // Post announcement functionality
+    postAnnouncementBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const title = document.getElementById("announcement-title").value;
+      const content = document.getElementById("announcement-content").value;
+
+      if (title && content) {
+        alert(`공지 제목: ${title}\n공지 내용: ${content}\n\n공지사항이 게시되었습니다.`);
+        document.getElementById("announcement-title").value = "";
+        document.getElementById("announcement-content").value = "";
+      } else {
+        alert("공지 제목과 내용을 입력해주세요.");
+      }
+    });
+  </script>
+</body>
+</html>
