@@ -1,4 +1,3 @@
-    <!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,37 +8,10 @@
 </head>
 <body>
   <header>
-    사랑하는 우리교회
+    <img src="icons/logo.png" alt="사랑하는 우리교회 로고">
   </header>
 
   <main>
-    <!-- Login Section -->
-    <section id="login" class="section active">
-        <h2>로그인</h2>
-        
-        <div class="input-group">
-            <label for="user-name">이름</label>
-            <input type="text" id="user-name" class="input-field" placeholder="이름 입력" />
-        </div>
-
-        <div class="input-group">
-            <label for="user-birth">생년월일</label>
-            <input type="text" id="user-birth" class="input-field" placeholder="예: 190906" />
-        </div>
-
-        <div class="input-group remember-me">
-            <label for="remember-me" class="checkbox-label">
-            <input type="checkbox" id="remember-me" class="checkbox-input" checked />
-            <span class="custom-checkbox"></span>
-            로그인 정보 기억하기
-            </label>
-        </div>
-
-        <div class="button-group">
-            <button id="login-btn" class="login-button">로그인</button>
-        </div>
-    </section>
-
     <!-- Home Section -->
     <section id="home" class="section">
       <h2>공지사항</h2>
@@ -49,43 +21,95 @@
       <h2>추천 유튜브</h2>
       <a id="youtube-link" href="#" target="_blank">유튜브 링크 1</a>
     </section>
-
+  
     <!-- Task Section -->
     <section id="tasks" class="section">
-      <h2>숙제 체크</h2>
       <div id="calendar-container">
-        <h3>달력</h3>
-        <div class="calendar" id="calendar">
-          <!-- Days will be dynamically generated here -->
+        <div class="calendar-nav">
+          <button id="prev-month" class="arrow-btn">◀</button>
+          <h3 id="calendar-title">2025년 3월</h3>
+          <button id="next-month" class="arrow-btn">▶</button>
         </div>
-        <div id="task-checklist" class="task-checklist">
-            <!-- 가로 배열된 숙제 버튼 -->
-            <div class="task-cards">
-              <div class="task-card" id="task-song">
-                <img src="icons/song.png" alt="암송">
-                <p>암송</p>
-              </div>
-              <div class="task-card" id="task-prayer">
-                <img src="icons/pray.png" alt="기도">
-                <p>기도</p>
-              </div>
-              <div class="task-card" id="task-qt">
-                <img src="icons/QT.png" alt="큐티">
-                <p>큐티</p>
-              </div>
-            </div>
+        <div class="calendar-weekdays">
+          <div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>
+        </div>
+        <div class="calendar" id="calendar"></div>
+      </div>
           
-            <!-- 저장 버튼 -->
-            <button id="save-btn">저장</button>
+        <div id="task-checklist" class="task-checklist">
+          <div class="task-cards">
+            <div class="task-card" id="task-qt">
+              <img src="icons/QT.png" alt="큐티">
+              <p>큐티</p>
+            </div>
+            <div class="task-card" id="task-song">
+              <img src="icons/song.png" alt="암송">
+              <p>암송</p>
+            </div>
+            <div class="task-card" id="task-prayer">
+              <img src="icons/pray.png" alt="삶에서 하는 기도">
+              <p>삶에서 하는 기도</p>
+            </div>
+            <div class="task-card" id="task-bible">
+              <img src="icons/bible.png" alt="성경통독">
+              <p>성경통독</p>
+            </div>
           </div>
+          <button id="save-btn">저장</button>
+        </div>
       </div>
     </section>
-  </main>
+  
+    <!-- 내 정보 섹션 -->
+    <section id="profile" class="section">
+      <p id="user-info-display">로그인 정보가 없습니다.</p>
+      <button id="logout-btn" class="logout-button">로그아웃</button>
+    </section>
+  </main>  
 
   <footer class="footer">
-    <button id="home-btn">홈</button>
-    <button id="tasks-btn">숙제 체크</button>
+    <button id="home-btn"><img src="icons/home.png" alt="홈">
+      <p>홈</p></button>
+    <button id="tasks-btn"><img src="icons/chek.png" alt="거룩한루틴체크">
+      <p>거룩한 루틴 체크!</p></button>
+    <button id="open-profile-btn" class="login-popup-trigger"><img src="icons/me.png" alt="내정보">
+      <p>내 정보</p></button>
   </footer>
+
+  <!-- 로그인 팝업 -->
+  <div id="login-popup" class="popup-overlay">
+    <div class="popup-content">
+      <h2>로그인</h2>
+
+      <div class="input-group">
+        <label for="user-name">이름</label>
+        <input type="text" id="user-name" class="input-field" placeholder="이름 입력" />
+      </div>
+
+      <div class="input-group">
+        <label for="user-birth">생년월일</label>
+        <input type="text" id="user-birth" class="input-field" placeholder="예: 190906" />
+      </div>
+
+      <div class="input-group">
+        <label for="user-department">부서</label>
+        <select id="user-department" class="input-field">
+          <option value="유치부">유치부</option>
+          <option value="초등부">초등부</option>
+          <option value="중고등부">중고등부</option>
+        </select>
+      </div>
+
+      <div class="input-group remember-me">
+        <label for="remember-me" class="checkbox-label">
+          <input type="checkbox" id="remember-me" class="checkbox-input" checked />
+          로그인 정보 기억하기
+        </label>
+      </div>
+
+      <button id="login-btn" class="login-button">로그인</button>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
