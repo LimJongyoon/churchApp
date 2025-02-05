@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  
+
   <title>사랑하는 우리교회</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -32,12 +32,31 @@
     <!-- Home Section -->
     <section id="home" class="section">
       <h2>공지사항</h2>
-      <div id="announcement-list">
-        <!-- 공지사항이 여기에 표시됩니다. -->
+      <!-- 공지사항 박스 -->
+      <div class="content-box">
+        <div id="announcement-list">
+          <p>이번 주는 예배가 없습니다.</p>
+          <p>2월 둘째 주는 생일인 친구가 있습니다!</p>
+        </div>
       </div>
-      <h2>추천 유튜브</h2>
-      <a id="youtube-link" href="#" target="_blank">유튜브 링크 1</a>
+    
+      <!-- 추천 유튜브 박스 -->
+      <div class="content-box">
+        <h4>추천 유튜브</h4>
+        <div class="youtube-wrapper">
+          <iframe class="youtube-video" src="https://www.youtube.com/embed/uThLY1OGWjc" 
+                  title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    
+      <!-- 삶에서 하는 기도 박스 -->
+      <div class="content-box">
+        <h4>이번 달 삶에서 하는 기도</h4>
+        <img src="icons/prayer.png" alt="삶에서 하는 기도 이미지" class="prayer-image">
+      </div>
     </section>
+    
+
   
     <!-- Task Section -->
     <section id="tasks" class="section">
