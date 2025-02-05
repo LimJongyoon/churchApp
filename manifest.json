@@ -3,8 +3,8 @@
     "short_name": "사랑하는 우리교회",
     "start_url": "/churchApp/",
     "display": "standalone",
-    "background_color": "#FAF3E0",
-    "theme_color": "#A3D7D0",
+    "background_color": "#ffe2ec",
+    "theme_color": "#ffe2ec",
     "description": "사랑하는 우리교회의 거룩한루틴 체크용 앱",
     "icons": [
       {

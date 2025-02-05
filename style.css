@@ -395,7 +395,7 @@ main {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, #A3D7D0, #E09CB3); /* 민트 → 분홍 그라데이션 */
+  background: linear-gradient(to bottom, #E09CB3, #A3D7D0); /* 민트 → 분홍 그라데이션 */
   display: none; /* 기본적으로 숨김 */
   z-index: 9999;
 }
