@@ -141,6 +141,15 @@ main {
   transform: scale(1.05);
 }
 
+#calendar-container {
+  background-color: #ffffff; /* 깔끔한 흰색 배경 */
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 얇은 그림자 */
+  margin-bottom: 30px;
+}
+
 .calendar-nav {
   display: flex;
   justify-content: space-between;
@@ -173,8 +182,12 @@ main {
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
+.calendar-weekdays div:first-child {
+  color: #FF4C4C; /* 일요일 빨간색 */
+}
+
 
 /* 달력 박스 */
 .calendar {
@@ -189,7 +202,7 @@ main {
   position: relative;
   background-color: #ffffff;
   color: #333;
-  border: 1px solid #ddd;
+  border: 0px solid #ddd;
   border-radius: 5px;
   text-align: center;
   font-size: 1rem;
@@ -199,6 +212,10 @@ main {
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.calendar-day:nth-child(7n + 1) {
+  color: #FF4C4C; /* 일요일 빨간색 */
 }
 
 
