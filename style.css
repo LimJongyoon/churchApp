@@ -1,4 +1,22 @@
 /* Reset and basic styling */
+
+/* 전체 텍스트 선택 방지 */
+body, button, input, select, textarea {
+  -webkit-user-select: none;  /* 사파리 브라우저 */
+  -ms-user-select: none;      /* 구형 IE 브라우저 */
+  user-select: none;          /* 최신 브라우저 */
+}
+
+/* 모든 상호작용에 대한 터치 줌 방지 */
+html, body {
+  -ms-touch-action: manipulation;  /* IE10 이상 */
+  touch-action: manipulation;
+}
+button, .calendar-day, .arrow-btn {
+  outline: none; /* 파란색 윤곽선 제거 */
+  -webkit-tap-highlight-color: transparent; /* 터치 시 강조 효과 제거 */
+}
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;

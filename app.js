@@ -42,10 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
     homeSection.classList.add("active");  // 저장된 정보 있으면 홈 섹션 보이기
   }
 
+  generateCalendar(currentYear, currentMonth);  // 새로고침 시 달력도 함께 생성
   loadChecklistState();  // 저장된 체크리스트 상태 불러오기
-  generateCalendar(currentYear, currentMonth);  // 새로고침 시 달력 생성
+
+  // "거룩한 루틴 체크" 섹션으로 들어갈 때 오늘 날짜 기본 선택
   taskChecklist.dataset.selectedDay = todayDate;
-  updateChecklist(todayDate);  // "거룩한 루틴 체크" 섹션으로 들어갈 때 오늘 날짜 기본 선택
+  updateChecklist(todayDate);
 });
 
 // 체크리스트 상태 로컬스토리지에서 불러오기
@@ -89,18 +91,6 @@ function generateCalendar(year, month) {
       dayButton.classList.add("selected");
     }
 
-    // 체크리스트에 따라 달력 색상 설정
-    if (checklistState[currentDay]) {
-      const completedTasks = checklistState[currentDay].length;
-      if (completedTasks === 4) {
-        dayButton.classList.add("all-completed");  // 초록색
-      } else if (completedTasks > 0) {
-        dayButton.classList.add("partially-completed");  // 노란색
-      } else {
-        dayButton.classList.add("not-completed");  // 빨간색
-      }
-    }
-
     // 날짜 클릭 이벤트
     dayButton.addEventListener("click", () => {
       taskChecklist.dataset.selectedDay = currentDay;
@@ -109,6 +99,21 @@ function generateCalendar(year, month) {
       updateChecklist(currentDay);
     });
 
+    // 점 표시하는 div 추가
+    const dotContainer = document.createElement("div");
+    dotContainer.classList.add("dot-container");
+
+    // 체크리스트 개수에 따라 점 추가
+    if (checklistState[currentDay]) {
+      const completedTasks = checklistState[currentDay].length;
+      for (let i = 0; i < completedTasks; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        dotContainer.appendChild(dot);
+      }
+    }
+
+    dayButton.appendChild(dotContainer);
     calendar.appendChild(dayButton);
   }
 }
@@ -133,45 +138,32 @@ saveBtn.addEventListener("click", () => {
   const completedTasks = Array.from(document.querySelectorAll(".task-card.completed")).map(card => card.id);
   checklistState[selectedDay] = completedTasks;
   saveChecklistState();  // 로컬스토리지에 저장
-  alert("거룩한 루틴을 수행했어요!");
+  alert("거룩한 루틴을 수행 했어요!");
 
-  // 다시 달력을 재생성하여 체크리스트 상태 업데이트
+  // 다시 달력을 재생성하여 점 표시 업데이트
   generateCalendar(currentYear, currentMonth);
+
+// 모든 날짜의 선택 해제
+document.querySelectorAll(".calendar-day").forEach(btn => btn.classList.remove("selected"));
+
+// 저장된 날짜만 선택 상태 유지
+const currentDayButton = Array.from(document.querySelectorAll(".calendar-day")).find(
+  btn => btn.textContent === parseInt(selectedDay.split('-')[2]).toString()
+);
+
+if (currentDayButton) {
+  currentDayButton.classList.add("selected");
+}
+
+// 선택된 날짜의 체크리스트 업데이트
+updateChecklist(selectedDay);
 });
 
-// 로그인 버튼 클릭 시
-loginBtn.addEventListener("click", () => {
-  const userName = document.getElementById("user-name").value;
-  const userBirth = document.getElementById("user-birth").value;
-  const userDepartment = document.getElementById("user-department").value;
-
-  if (!userName || !userBirth) {
-    alert("이름과 생년월일을 입력해주세요.");
-    return;
-  }
-
-  // 로그인 정보 저장 (로컬스토리지)
-  localStorage.setItem("userName", userName);
-  localStorage.setItem("userBirth", userBirth);
-  localStorage.setItem("userDepartment", userDepartment);
-
-  // 사용자 정보 표시 및 팝업 닫기
-  userInfoDisplay.textContent = `이름: ${userName}, 부서: ${userDepartment}`;
-  loginPopup.classList.remove("active");
-
-  hideAllSections();  // 모든 섹션 숨기기
-  homeSection.classList.add("active");  // 홈 섹션 보이기
-
-  loadChecklistState();  // 로그인 후 체크리스트 상태 다시 불러오기
-  generateCalendar(currentYear, currentMonth);  // 달력 갱신 및 점 상태 반영
-});
-
-// 로그아웃 버튼 클릭 시
-logoutBtn.addEventListener("click", () => {
-  localStorage.clear();  // 모든 로컬스토리지 데이터 초기화
-  userInfoDisplay.textContent = "로그인 정보가 없습니다.";
-  hideAllSections();
-  loginPopup.classList.add("active");
+// 작업 카드 클릭 시 완료 상태 토글
+document.querySelectorAll(".task-card").forEach(card => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("completed");
+  });
 });
 
 // 이전 달로 이동
@@ -193,6 +185,44 @@ nextMonthBtn.addEventListener("click", () => {
   }
   generateCalendar(currentYear, currentMonth);
 });
+
+// 🚀 로그인 버튼 클릭 이벤트 추가
+loginBtn.addEventListener("click", () => {
+  const userName = document.getElementById("user-name").value;
+  const userBirth = document.getElementById("user-birth").value;
+  const userDepartment = document.getElementById("user-department").value;
+
+  if (!userName || !userBirth) {
+    alert("이름과 생년월일을 입력해주세요.");
+    return;
+  }
+
+  // 로그인 정보 저장 (localStorage)
+  localStorage.setItem("userName", userName);
+  localStorage.setItem("userBirth", userBirth);
+  localStorage.setItem("userDepartment", userDepartment);
+
+  // 사용자 정보 표시 및 팝업 닫기
+  userInfoDisplay.textContent = `이름: ${userName}, 부서: ${userDepartment}`;
+  loginPopup.classList.remove("active");
+
+  hideAllSections();  // 모든 섹션 숨기기
+  homeSection.classList.add("active");  // 홈 섹션 보이기
+
+  loadChecklistState();  // 로그인 후 체크리스트 상태 불러오기
+  generateCalendar(currentYear, currentMonth);  // 달력 갱신 및 점 상태 반영
+});
+
+// 🚀 로그아웃 버튼 클릭 이벤트 추가
+logoutBtn.addEventListener("click", () => {
+  localStorage.clear();  // 모든 로컬스토리지 데이터 초기화
+  userInfoDisplay.textContent = "로그인 정보가 없습니다.";
+  hideAllSections();
+  loginPopup.classList.add("active");
+});
+
+// ** 나머지 코드는 기존대로 유지됩니다.**
+
 
 // 🚀 푸터 버튼 클릭 이벤트 추가
 homeBtn.addEventListener("click", () => {
