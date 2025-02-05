@@ -1,6 +1,6 @@
 {
     "name": "사랑하는 우리교회",
-    "short_name": "우리교회",
+    "short_name": "사랑하는 우리교회",
     "start_url": "/churchApp/",
     "display": "standalone",
     "background_color": "#FAF3E0",

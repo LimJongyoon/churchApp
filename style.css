@@ -12,7 +12,7 @@ body, button, input, select, textarea {
 html, body {
   -ms-touch-action: manipulation;  /* IE10 이상 */
   touch-action: manipulation;
-  overflow: hidden; /* 전체 화면 사용 */
+  overflow-x: hidden; /* 전체 화면 사용 */
 }
 button, .calendar-day, .arrow-btn, .task-card {
   outline: none; /* 파란색 윤곽선 제거 */
@@ -22,7 +22,7 @@ button, .calendar-day, .arrow-btn, .task-card {
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #FAF3E0; /* 부드러운 베이지 배경 */
+  background-color: #ffffff; /* 부드러운 베이지 배경 */
   color: #333;
   touch-action: manipulation;
   padding-bottom: 80px;
