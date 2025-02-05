@@ -42,12 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     homeSection.classList.add("active");  // 저장된 정보 있으면 홈 섹션 보이기
   }
 
-  generateCalendar(currentYear, currentMonth);  // 새로고침 시 달력도 함께 생성
   loadChecklistState();  // 저장된 체크리스트 상태 불러오기
-
-  // "거룩한 루틴 체크" 섹션으로 들어갈 때 오늘 날짜 기본 선택
+  generateCalendar(currentYear, currentMonth);  // 새로고침 시 달력 생성
   taskChecklist.dataset.selectedDay = todayDate;
-  updateChecklist(todayDate);
+  updateChecklist(todayDate);  // "거룩한 루틴 체크" 섹션으로 들어갈 때 오늘 날짜 기본 선택
 });
 
 // 체크리스트 상태 로컬스토리지에서 불러오기
@@ -91,14 +89,6 @@ function generateCalendar(year, month) {
       dayButton.classList.add("selected");
     }
 
-    // 날짜 클릭 이벤트
-    dayButton.addEventListener("click", () => {
-      taskChecklist.dataset.selectedDay = currentDay;
-      document.querySelectorAll(".calendar-day").forEach(btn => btn.classList.remove("selected"));
-      dayButton.classList.add("selected");
-      updateChecklist(currentDay);
-    });
-
     // 체크리스트에 따라 달력 색상 설정
     if (checklistState[currentDay]) {
       const completedTasks = checklistState[currentDay].length;
@@ -110,6 +100,14 @@ function generateCalendar(year, month) {
         dayButton.classList.add("not-completed");  // 빨간색
       }
     }
+
+    // 날짜 클릭 이벤트
+    dayButton.addEventListener("click", () => {
+      taskChecklist.dataset.selectedDay = currentDay;
+      document.querySelectorAll(".calendar-day").forEach(btn => btn.classList.remove("selected"));
+      dayButton.classList.add("selected");
+      updateChecklist(currentDay);
+    });
 
     calendar.appendChild(dayButton);
   }
@@ -135,7 +133,7 @@ saveBtn.addEventListener("click", () => {
   const completedTasks = Array.from(document.querySelectorAll(".task-card.completed")).map(card => card.id);
   checklistState[selectedDay] = completedTasks;
   saveChecklistState();  // 로컬스토리지에 저장
-  alert("거룩한 루틴을 수행 했어요!");
+  alert("거룩한 루틴을 수행했어요!");
 
   // 다시 달력을 재생성하여 체크리스트 상태 업데이트
   generateCalendar(currentYear, currentMonth);
@@ -163,15 +161,14 @@ loginBtn.addEventListener("click", () => {
 
   hideAllSections();  // 모든 섹션 숨기기
   homeSection.classList.add("active");  // 홈 섹션 보이기
-  generateCalendar(currentYear, currentMonth);  // 달력 생성
+
+  loadChecklistState();  // 로그인 후 체크리스트 상태 다시 불러오기
+  generateCalendar(currentYear, currentMonth);  // 달력 갱신 및 점 상태 반영
 });
 
 // 로그아웃 버튼 클릭 시
 logoutBtn.addEventListener("click", () => {
-  localStorage.removeItem("userName");
-  localStorage.removeItem("userBirth");
-  localStorage.removeItem("userDepartment");
-
+  localStorage.clear();  // 모든 로컬스토리지 데이터 초기화
   userInfoDisplay.textContent = "로그인 정보가 없습니다.";
   hideAllSections();
   loginPopup.classList.add("active");
