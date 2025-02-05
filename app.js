@@ -221,19 +221,24 @@ logoutBtn.addEventListener("click", () => {
   loginPopup.classList.add("active");
 });
 
-document.addEventListener('touchstart', function(e) {
-  e.preventDefault();  // 기본 동작 차단
-}, { passive: false });
-
 let lastTouchEnd = 0;
 
+// 더블탭으로 인한 확대 방지
 document.addEventListener('touchend', (event) => {
   const now = (new Date()).getTime();
   if (now - lastTouchEnd <= 300) {
-    event.preventDefault();  // 더블탭으로 인한 스크롤 방지
+    event.preventDefault();  // 더블탭으로 인한 기본 동작 차단
   }
   lastTouchEnd = now;
 }, false);
+
+// 기본 동작을 선택적으로 차단하는 함수
+document.addEventListener('touchstart', function(e) {
+  // 특정 요소에서만 기본 동작을 허용 (예: 버튼, 입력 필드)
+  if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+    e.preventDefault();  // 스크롤 등 기본 동작 차단
+  }
+}, { passive: false });
 
 
 // 🚀 푸터 버튼 클릭 이벤트 추가
