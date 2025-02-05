@@ -221,7 +221,19 @@ logoutBtn.addEventListener("click", () => {
   loginPopup.classList.add("active");
 });
 
-// ** 나머지 코드는 기존대로 유지됩니다.**
+document.addEventListener('touchstart', function(e) {
+  e.preventDefault();  // 기본 동작 차단
+}, { passive: false });
+
+let lastTouchEnd = 0;
+
+document.addEventListener('touchend', (event) => {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();  // 더블탭으로 인한 스크롤 방지
+  }
+  lastTouchEnd = now;
+}, false);
 
 
 // 🚀 푸터 버튼 클릭 이벤트 추가

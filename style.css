@@ -1,6 +1,7 @@
 /* Reset and basic styling */
 
 /* 전체 텍스트 선택 방지 */
+
 body, button, input, select, textarea {
   -webkit-user-select: none;  /* 사파리 브라우저 */
   -ms-user-select: none;      /* 구형 IE 브라우저 */
@@ -11,8 +12,9 @@ body, button, input, select, textarea {
 html, body {
   -ms-touch-action: manipulation;  /* IE10 이상 */
   touch-action: manipulation;
+  overflow: hidden; /* 전체 화면 사용 */
 }
-button, .calendar-day, .arrow-btn {
+button, .calendar-day, .arrow-btn, .task-card {
   outline: none; /* 파란색 윤곽선 제거 */
   -webkit-tap-highlight-color: transparent; /* 터치 시 강조 효과 제거 */
 }
