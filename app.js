@@ -31,16 +31,51 @@ document.addEventListener("DOMContentLoaded", () => {
     // 이름 + 생년월일을 고유 아이디로 설정
     const userId = `${userName}_${userBirth}`;
 
-    // Firebase의 users 경로에 데이터 저장
-    database.ref('users/' + userId).set({
-      name: userName,
-      birth: userBirth,
-      department: userDepartment
-    }).then(() => {
-      alert("로그인 정보가 성공적으로 저장되었습니다.");
-    }).catch((error) => {
-      console.error("데이터 저장 중 오류 발생:", error);
-    });
+    // 기존 데이터가 있는지 확인
+    database.ref('users/' + userId).once('value')
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          // 기존 데이터가 있으면 그대로 사용
+          alert("기존 데이터가 불러와졌습니다.");
+          const userData = snapshot.val();
+          
+          // 사용자 정보 표시 및 팝업 닫기
+          userInfoDisplay.textContent = `이름: ${userData.name}, 부서: ${userData.department}`;
+          loginPopup.classList.remove("active");
+
+          // 로컬스토리지에 사용자 정보 저장
+          localStorage.setItem("userName", userData.name);
+          localStorage.setItem("userBirth", userData.birth);
+          localStorage.setItem("userDepartment", userData.department);
+
+          // 루틴 데이터 불러오기
+          loadChecklistState();
+        } else {
+          // 데이터가 없으면 새로 저장
+          return database.ref('users/' + userId).set({
+            name: userName,
+            birth: userBirth,
+            department: userDepartment,
+            routines: {}  // 초기 루틴 데이터는 빈 객체로 설정
+          }).then(() => {
+            alert("새로운 사용자가 등록되었습니다.");
+
+            // 로컬스토리지에 사용자 정보 저장
+            localStorage.setItem("userName", userName);
+            localStorage.setItem("userBirth", userBirth);
+            localStorage.setItem("userDepartment", userDepartment);
+
+            // 사용자 정보 표시 및 팝업 닫기
+            userInfoDisplay.textContent = `이름: ${userName}, 부서: ${userDepartment}`;
+            loginPopup.classList.remove("active");
+
+            loadChecklistState();  // 초기 루틴 데이터 불러오기
+          });
+        }
+      })
+      .catch(error => {
+        console.error("로그인 중 오류 발생:", error);
+      });
   });
 });
 
