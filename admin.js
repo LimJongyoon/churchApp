@@ -57,45 +57,79 @@ document.getElementById('filter-btn').addEventListener('click', async function()
 
 // 화면에 숙제 현황 표시
 function displayUserStats(users, department, year, month) {
-  const container = document.getElementById('stats-container');
-  container.innerHTML = '';  // 기존 내용을 초기화
-
-  let foundData = false;  // 데이터가 있는지 확인하기 위한 플래그
-
-  for (const userId in users) {
-    const user = users[userId];
-
-    // 선택한 부서에 해당하는 사용자만 처리
-    if (user.department === department) {
-      const routines = user.routines || {};
-
-      // 월별 데이터 필터링
-      const tasksInMonth = Object.keys(routines).filter(date => {
-        const [taskYear, taskMonth] = date.split('-');
-        return taskYear === year && parseInt(taskMonth) === parseInt(month);
-      });
-
-      if (tasksInMonth.length > 0) {
-        foundData = true;
-        const taskDetails = tasksInMonth.map(date => {
-          return `
-            <li>
-              <strong>${date}</strong>: ${routines[date].join(', ')}
-            </li>`;
-        }).join('');
-
-        // 사용자별 숙제 현황 출력
-        container.innerHTML += `
-          <div class="user">
-            <h3>${user.name} (${userId})</h3>
-            <ul>${taskDetails}</ul>
-          </div>`;
+    const container = document.getElementById('stats-container');
+    container.innerHTML = '';  // 기존 내용을 초기화
+  
+    let foundData = false;  // 데이터가 있는지 확인하기 위한 플래그
+  
+    const taskNames = {
+      "task-qt": "큐티",
+      "task-song": "암송",
+      "task-prayer": "삶에서 하는 기도",
+      "task-bible": "성경통독"
+    };
+  
+    // 사용자별로 반복
+    for (const userId in users) {
+      const user = users[userId];
+  
+      // 선택한 부서에 해당하는 사용자만 처리
+      if (user.department === department) {
+        const routines = user.routines || {};
+  
+        // 월별 데이터 필터링
+        const tasksInMonth = Object.keys(routines).filter(date => {
+          const [taskYear, taskMonth] = date.split('-');
+          return taskYear === year && parseInt(taskMonth) === parseInt(month);
+        });
+  
+        if (tasksInMonth.length > 0) {
+          foundData = true;
+  
+          // 각 태스크의 횟수를 셈
+          const taskCounts = {
+            "큐티": 0,
+            "암송": 0,
+            "삶에서 하는 기도": 0,
+            "성경통독": 0
+          };
+  
+          const taskDetails = tasksInMonth.map(date => {
+            const tasks = routines[date];
+  
+            // 날짜별로 각 태스크 카운트하기
+            tasks.forEach(task => {
+              const taskName = taskNames[task];
+              if (taskName) taskCounts[taskName]++;
+            });
+  
+            return `
+              <li>
+                <strong>${date}</strong>: ${tasks.map(task => taskNames[task]).join(', ')}
+              </li>`;
+          }).join('');
+  
+          // 사용자별 숙제 현황 출력
+          container.innerHTML += `
+            <div class="user">
+              <h3>${user.name} (${userId})</h3>
+              <p><strong>완료한 날짜</strong></p>
+              <ul>${taskDetails}</ul>
+              <p><strong>각 태스크별 완료 횟수</strong></p>
+              <ul>
+                <li>큐티: ${taskCounts["큐티"]}회</li>
+                <li>암송: ${taskCounts["암송"]}회</li>
+                <li>삶에서 하는 기도: ${taskCounts["삶에서 하는 기도"]}회</li>
+                <li>성경통독: ${taskCounts["성경통독"]}회</li>
+              </ul>
+            </div>`;
+        }
       }
     }
+  
+    // 데이터가 없을 경우 메시지 출력
+    if (!foundData) {
+      container.innerHTML = "<p>해당 조건에 데이터가 없습니다.</p>";
+    }
   }
-
-  // 데이터가 없을 경우 메시지 출력
-  if (!foundData) {
-    container.innerHTML = "<p>해당 조건에 데이터가 없습니다.</p>";
-  }
-}
+  
