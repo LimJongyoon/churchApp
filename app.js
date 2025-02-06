@@ -1,4 +1,4 @@
-// Firebase 초기화
+// Firebase 초기화 (app.js 맨 위로 이동)
 const firebaseConfig = {
   apiKey: "AIzaSyAz2wuHxyUWmXXzUZg_wEmxYGSNviBHpSs",
   authDomain: "churchapp-15674.firebaseapp.com",
@@ -9,6 +9,11 @@ const firebaseConfig = {
   appId: "1:902474475312:web:19109da15e9e473a8e4af5",
   measurementId: "G-8WH6FQ817T"
 };
+
+// Firebase 초기화
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 
 // 로그인 버튼 클릭 시 사용자 정보를 저장
 loginBtn.addEventListener("click", () => {
@@ -32,11 +37,6 @@ loginBtn.addEventListener("click", () => {
     console.error("데이터 저장 중 오류 발생:", error);
   });
 });
-
-
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
 
 
 // 기존 요소 가져오기
