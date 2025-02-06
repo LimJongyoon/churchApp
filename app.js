@@ -1,3 +1,44 @@
+// Firebase 초기화
+const firebaseConfig = {
+  apiKey: "AIzaSyAz2wuHxyUWmXXzUZg_wEmxYGSNviBHpSs",
+  authDomain: "churchapp-15674.firebaseapp.com",
+  databaseURL: "https://churchapp-15674-default-rtdb.firebaseio.com",
+  projectId: "churchapp-15674",
+  storageBucket: "churchapp-15674.firebasestorage.app",
+  messagingSenderId: "902474475312",
+  appId: "1:902474475312:web:19109da15e9e473a8e4af5",
+  measurementId: "G-8WH6FQ817T"
+};
+
+// 로그인 버튼 클릭 시 사용자 정보를 저장
+loginBtn.addEventListener("click", () => {
+  const userName = document.getElementById("user-name").value;
+  const userBirth = document.getElementById("user-birth").value;
+  const userDepartment = document.getElementById("user-department").value;
+
+  if (!userName || !userBirth) {
+    alert("이름과 생년월일을 입력해주세요.");
+    return;
+  }
+
+  // Firebase의 users 경로에 데이터 저장
+  firebase.database().ref('users/' + userName).set({
+    name: userName,
+    birth: userBirth,
+    department: userDepartment
+  }).then(() => {
+    alert("로그인 정보가 성공적으로 저장되었습니다.");
+  }).catch((error) => {
+    console.error("데이터 저장 중 오류 발생:", error);
+  });
+});
+
+
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+
 // 기존 요소 가져오기
 const homeSection = document.getElementById("home");
 const tasksSection = document.getElementById("tasks");
