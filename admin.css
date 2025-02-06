@@ -1,0 +1,147 @@
+body, button, input, select, textarea {
+    -webkit-user-select: none;  /* 사파리 브라우저 */
+    -ms-user-select: none;      /* 구형 IE 브라우저 */
+    user-select: none;          /* 최신 브라우저 */
+  }
+  
+  /* 모든 상호작용에 대한 터치 줌 방지 */
+  html, body {
+    -ms-touch-action: manipulation;  /* IE10 이상 */
+    touch-action: manipulation;
+    overflow-x: hidden; /* 전체 화면 사용 */
+  }
+  button, .calendar-day, .arrow-btn, .task-card {
+    outline: none; /* 파란색 윤곽선 제거 */
+    -webkit-tap-highlight-color: transparent; /* 터치 시 강조 효과 제거 */
+  }
+  
+  body {
+    max-width: 600px; /* 최대 폭을 모바일 해상도로 제한 */
+    margin: 0 auto; /* 화면 중앙에 배치 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(to bottom, #ffe2ec, #ffe2ec); /* 분홍 → 민트 그라데이션 */
+    color: #333;
+    touch-action: manipulation;
+    padding-bottom: 80px;
+  }
+
+header {
+  color: rgb(148, 148, 148);
+  padding: 0px;
+  text-align: center;
+}
+
+main {
+  padding: 20px;
+}
+
+.footer {
+    max-width: 600px; /* 최대 폭을 모바일 해상도로 제한 */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;  /* 푸터 높이를 명시적으로 설정 */
+    background-color: #eafffc;
+    display: flex;
+    justify-content: space-around;
+    padding: 7px 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+.footer button {
+flex: 1;
+margin: 0 8px;
+margin-bottom: 20px;
+padding: 12px;
+font-size: 1rem;
+color: rgb(0, 0, 0);
+background-color: #d5f9f4;
+border: none;
+border-radius: 12px;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.2s ease;
+/*box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);*/
+}
+
+.footer button:active {
+background-color: #d38ba4;  /* 클릭 시 색상 변화 */
+transform: scale(0.95);     /* 살짝 눌리는 효과 */
+}
+  
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.announcement-form input,
+.announcement-form textarea{
+  display: block;
+  margin: 0 auto;  /* 부모 요소 기준으로 중앙 정렬 */
+  width: 90%;
+  padding: 20px;
+  border: 1px solid #dbfff6;
+  border-radius: 15px;
+}
+
+.announcement-form button {
+    width: 100%;  /* 버튼 너비를 100%로 설정해서 중앙 정렬 */
+    padding: 10px;
+    background-color: #e4a4b9;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 auto;  /* 부모 요소 기준으로 중앙 정렬 */
+    margin-top: 10px;
+    margin-bottom: 40px;
+    display: block;  /* 블록 요소로 설정하여 중앙 정렬 보장 */
+}
+
+.filter-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+select{
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #e4a4b9;
+  border-radius: 5px;
+  background-color: #fff2f6;
+  color: rgb(0, 0, 0);
+  border: none;
+  text-align: center;
+  font-size: 16px;
+}
+
+button{
+    background-color: #e4a4b9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+select {
+  flex: 1;
+}
+
+.user-stats {
+  margin-top: 20px;
+}
+
+.user {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

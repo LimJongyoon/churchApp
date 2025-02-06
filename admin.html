@@ -4,103 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>사랑하는 우리교회 - 관리자</title>
-  <style>
-    /* Reset and basic styling */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-    }
-
-    header {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px;
-      text-align: center;
-    }
-
-    main {
-      padding: 20px;
-    }
-
-    .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #4CAF50;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-    }
-
-    .footer button {
-      flex: 1;
-      margin: 0 5px;
-      padding: 10px;
-      font-size: 1rem;
-      color: white;
-      background-color: #66bb6a;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .footer button.active {
-      background-color: #388e3c;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .announcement-form {
-      margin-top: 20px;
-    }
-
-    .announcement-form input,
-    .announcement-form textarea,
-    .announcement-form button {
-      display: block;
-      margin: 10px 0;
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-
-    .filter-section {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    select,
-    button {
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-
-    select {
-      flex: 1;
-    }
-
-    .user-stats {
-      margin-top: 20px;
-    }
-
-    .user {
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
   <header>
@@ -108,11 +12,9 @@
   </header>
 
   <main>
-    <!-- 공지사항 관리 섹션 -->
     <section id="announcement-section" class="section active">
       <h2>공지 및 유튜브 관리</h2>
       <form class="announcement-form">
-        <input type="text" id="announcement-title" placeholder="공지 제목" />
         <textarea id="announcement-content" placeholder="공지 내용"></textarea>
         <button id="post-announcement">공지 게시</button>
       </form>
@@ -120,15 +22,23 @@
         <input type="text" id="youtube-link" placeholder="유튜브 링크" />
         <button id="post-youtube">유튜브 등록</button>
       </form>
+      <form class="announcement-form">
+        <input type="text" id="prayer-image" placeholder="삶에서하는 기도 사진 등록" />
+        <button id="post-prayer">삶에서하는 기도 사진 등록</button>
+      </form>
     </section>
 
-    <!-- 숙제 현황 섹션 -->
     <section id="user-stats-section" class="section">
       <h2>숙제 현황</h2>
-      <!-- 년도와 월 선택 -->
       <div class="filter-section">
+        <select id="user-department">
+          <option value="유치부">유치부</option>
+          <option value="초등부">초등부</option>
+          <option value="중고등부">중고등부</option>
+        </select>
         <select id="year-select">
-          <!-- JavaScript로 동적으로 추가 -->
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
         </select>
         <select id="month-select">
           <option value="1">1월</option>
@@ -146,7 +56,6 @@
         </select>
         <button id="filter-btn">조회</button>
       </div>
-      <!-- 사용자 숙제 현황 -->
       <div class="user-stats" id="stats-container">
         <p>년도와 월을 선택하여 조회하세요.</p>
       </div>
@@ -158,110 +67,6 @@
     <button id="stats-btn">숙제 현황</button>
   </footer>
 
-  <script>
-    // DOM References
-    const announcementSection = document.getElementById("announcement-section");
-    const statsSection = document.getElementById("user-stats-section");
-    const announcementBtn = document.getElementById("announcement-btn");
-    const statsBtn = document.getElementById("stats-btn");
-    const yearSelect = document.getElementById("year-select");
-    const monthSelect = document.getElementById("month-select");
-    const filterBtn = document.getElementById("filter-btn");
-    const statsContainer = document.getElementById("stats-container");
-
-    // Footer navigation
-    announcementBtn.addEventListener("click", () => {
-      announcementSection.classList.add("active");
-      statsSection.classList.remove("active");
-      announcementBtn.classList.add("active");
-      statsBtn.classList.remove("active");
-    });
-
-    statsBtn.addEventListener("click", () => {
-      announcementSection.classList.remove("active");
-      statsSection.classList.add("active");
-      announcementBtn.classList.remove("active");
-      statsBtn.classList.add("active");
-    });
-
-    // Populate year dropdown dynamically
-    const currentYear = new Date().getFullYear();
-    for (let year = currentYear - 5; year <= currentYear + 1; year++) {
-      const option = document.createElement("option");
-      option.value = year;
-      option.textContent = `${year}년`;
-      yearSelect.appendChild(option);
-    }
-    yearSelect.value = currentYear; // Default to current year
-
-    // Mock user data
-    const mockUserData = {
-      "2025-1": [
-        { name: "홍길동", completed: { song: 25, prayer: 27, qt: 26 } },
-        { name: "김철수", completed: { song: 28, prayer: 29, qt: 30 } },
-      ],
-      "2025-2": [
-        { name: "박영희", completed: { song: 20, prayer: 22, qt: 25 } },
-        { name: "이민호", completed: { song: 15, prayer: 17, qt: 18 } },
-      ]
-    };
-
-    // Filter button click event
-    filterBtn.addEventListener("click", () => {
-      const selectedYear = yearSelect.value;
-      const selectedMonth = monthSelect.value;
-      const key = `${selectedYear}-${selectedMonth}`;
-      const users = mockUserData[key] || [];
-
-      // Update stats container
-      statsContainer.innerHTML = "";
-      if (users.length === 0) {
-        statsContainer.innerHTML = "<p>선택한 달에는 데이터가 없습니다.</p>";
-        return;
-      }
-
-      users.forEach(user => {
-        const userDiv = document.createElement("div");
-        userDiv.classList.add("user");
-        userDiv.innerHTML = `
-          <h3>${user.name}</h3>
-          <p>암송: ${user.completed.song}회</p>
-          <p>기도: ${user.completed.prayer}회</p>
-          <p>큐티: ${user.completed.qt}회</p>
-        `;
-        statsContainer.appendChild(userDiv);
-      });
-    });
-
-    // Post announcement functionality
-    const postAnnouncementBtn = document.getElementById("post-announcement");
-    postAnnouncementBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const title = document.getElementById("announcement-title").value;
-      const content = document.getElementById("announcement-content").value;
-
-      if (title && content) {
-        alert(`공지 제목: ${title}\n공지 내용: ${content}\n\n공지사항이 게시되었습니다.`);
-        document.getElementById("announcement-title").value = "";
-        document.getElementById("announcement-content").value = "";
-      } else {
-        alert("공지 제목과 내용을 입력해주세요.");
-      }
-    });
-
-    // Post YouTube link functionality
-    const postYouTubeBtn = document.getElementById("post-youtube");
-    postYouTubeBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const youtubeLink = document.getElementById("youtube-link").value;
-
-      if (youtubeLink) {
-        alert(`유튜브 링크: ${youtubeLink}\n\n유튜브 링크가 등록되었습니다.`);
-        document.getElementById("youtube-link").value = "";
-      } else {
-        alert("유튜브 링크를 입력해주세요.");
-      }
-    });
-  </script>
+  <script type="module" src="admin.js"></script>
 </body>
 </html>
