@@ -1,10 +1,10 @@
 const CACHE_NAME = "pwa-cache-v2";
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/app.js",
-  "/icons/logo.png"
+  "/churchApp/",
+  "/churchApp/index.html",
+  "/churchApp/style.css",
+  "/churchApp/app.js",
+  "/churchApp/icons/logo.png"
 ];
 
 // 설치 단계에서 캐시할 파일 정의
