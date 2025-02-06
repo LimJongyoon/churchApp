@@ -28,6 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    if (userName === "admin" && userBirth === "admin") {
+      alert("관리자 계정으로 로그인합니다.");
+      localStorage.clear();
+      window.location.href = "admin.html";  // 관리자 페이지로 이동
+      return;
+    }
+  
+
     // 이름 + 생년월일을 고유 아이디로 설정
     const userId = `${userName}_${userBirth}`;
 
@@ -36,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(snapshot => {
         if (snapshot.exists()) {
           // 기존 데이터가 있으면 그대로 사용
-          alert("기존 데이터가 불러와졌습니다.");
+          //alert("기존 데이터가 불러와졌습니다.");
           const userData = snapshot.val();
           
           // 사용자 정보 표시 및 팝업 닫기
@@ -58,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             department: userDepartment,
             routines: {}  // 초기 루틴 데이터는 빈 객체로 설정
           }).then(() => {
-            alert("새로운 사용자가 등록되었습니다.");
+            //alert("새로운 사용자가 등록되었습니다.");
 
             // 로컬스토리지에 사용자 정보 저장
             localStorage.setItem("userName", userName);
