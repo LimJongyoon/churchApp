@@ -1,6 +1,5 @@
 const CACHE_NAME = "pwa-cache-v2";
 const urlsToCache = [
-  "/churchApp/",
   "/churchApp/index.html",
   "/churchApp/style.css",
   "/churchApp/app.js",
