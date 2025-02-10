@@ -226,7 +226,7 @@ function showPreview(inputId, previewId) {
   const reader = new FileReader();
 
   reader.onload = function (e) {
-    previewElement.innerHTML = `<img src="${e.target.result}" alt="선택한 이미지 미리보기" style="max-width: 100%; border-radius: 8px;" />`;
+    previewElement.innerHTML = `<img src="${e.target.result}" alt="선택한 이미지 미리보기" style="max-width: 20%; border-radius: 8px;" />`;
   };
   reader.readAsDataURL(file);
 }
