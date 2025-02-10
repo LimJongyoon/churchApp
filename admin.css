@@ -135,13 +135,97 @@ select {
   flex: 1;
 }
 
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  margin-bottom: 10px;
+  background-color: #ffe2ec;
+  border-radius: 12px;
+}
+
+.stats-header h2 {
+  margin: 0;
+  font-size: 20px;
+  margin-left: 3px;
+  flex: 1;
+}
+
+#sort-options {
+  padding: 8px;
+  max-width: 120px;
+  font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid #e4a4b9;
+  border-radius: 5px;
+}
+
+
 .user-stats {
   margin-top: 20px;
 }
 
 .user {
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border: 1px solid #e4a4b9;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background-color: #fff9fc;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #d38ba4;
+}
+
+.user .task-info {
+  flex: 1;
+}
+
+.user .task {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px; 
+}
+
+.user .task span {
+  font-weight: bold;
+  color: #333;
+}
+
+.user .task .count {
+  color: #4f4f4f; /* 숫자 강조 */
+  font-size: 14px;
+}
+
+.user .progress-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.user .progress-circle.low {
+  background-color: #ffa2a2; /* 낮은 퍼센트: 빨간색 */
+}
+
+.user .progress-circle.medium {
+  background-color: #ffdc9c; /* 중간 퍼센트: 주황색 */
+}
+
+.user .progress-circle.high {
+  background-color: #c2ffc4; /* 높은 퍼센트: 초록색 */
 }

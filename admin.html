@@ -16,20 +16,31 @@
       <h2>공지 및 유튜브 관리</h2>
       <form class="announcement-form">
         <textarea id="announcement-content" placeholder="공지 내용"></textarea>
-        <button id="post-announcement">공지 게시</button>
+        <button id="post-announcement">교육부 공지사항 등록</button>
       </form>
       <form class="announcement-form">
         <input type="text" id="youtube-link" placeholder="유튜브 링크" />
-        <button id="post-youtube">유튜브 등록</button>
+        <button id="post-youtube">이달의 암송송 🎵 등록</button>
       </form>
       <form class="announcement-form">
-        <input type="text" id="prayer-image" placeholder="삶에서하는 기도 사진 등록" />
+        <input type="file" id="prayer-image" accept="image/*" capture="environment" />
         <button id="post-prayer">삶에서하는 기도 사진 등록</button>
       </form>
+      <form class="announcement-form">
+        <input type="file" id="lyrics-image" accept="image/*" capture="environment" />
+        <button id="post-lyrics">이달의 암송 등록</button>
+      </form>      
     </section>
 
     <section id="user-stats-section" class="section">
-      <h2>숙제 현황</h2>
+      <div class="stats-header">
+        <h2>숙제 현황</h2>
+        <select id="sort-options">
+          <option value="percent"> % 높은 순 </option>
+          <option value="name"> 가나다순 </option>
+        </select>
+      </div>
+
       <div class="filter-section">
         <select id="user-department">
           <option value="유치부">유치부</option>
@@ -39,6 +50,8 @@
         <select id="year-select">
           <option value="2025">2025</option>
           <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
         </select>
         <select id="month-select">
           <option value="1">1월</option>
