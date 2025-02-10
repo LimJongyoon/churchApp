@@ -34,33 +34,43 @@
   <img src="icons/logo.png" alt="사랑하는 우리교회 로고">
 </header>-->
 
-  <main>
-    <!-- Home Section -->
-    <section id="home" class="section">
-      <h2>공지사항</h2>
-      <!-- 공지사항 박스 -->
-      <div class="content-box">
-        <div id="announcement-list">
-          <p>이번 주는 예배가 없습니다.</p>
-          <p>2월 둘째 주는 생일인 친구가 있습니다!</p>
-        </div>
+<main>
+  <!-- Home Section -->
+  <section id="home" class="section">
+    <!-- 공지사항 박스 -->
+    <div class="content-box">
+      <h4>교육부 공지사항</h4>
+      <div id="announcement-list"></div> <!-- 동적 데이터 표시 -->
+    </div>
+  
+    <!-- 추천 유튜브 박스 -->
+    <div class="content-box">
+      <h4>이달의 암송송🎵</h4>
+      <div class="youtube-wrapper">
+        <iframe class="youtube-video" src="" 
+                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
       </div>
-    
-      <!-- 추천 유튜브 박스 -->
-      <div class="content-box">
-        <h4>추천 유튜브</h4>
-        <div class="youtube-wrapper">
-          <iframe class="youtube-video" src="https://www.youtube.com/embed/uThLY1OGWjc" 
-                  title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-    
-      <!-- 삶에서 하는 기도 박스 -->
-      <div class="content-box">
-        <h4>이번 달 삶에서 하는 기도</h4>
-        <img src="icons/prayer.png" alt="삶에서 하는 기도 이미지" class="prayer-image">
-      </div>
-    </section>
+    </div>
+  
+    <!-- 삶에서 하는 기도 박스 -->
+    <div class="content-box">
+      <h4>삶에서 하는 기도</h4>
+      <img src="" alt="삶에서 하는 기도 이미지" class="prayer-image" id="prayer-image" />
+    </div>
+
+    <!-- 이달의 암송 박스 -->
+    <div class="content-box">
+      <h4>이달의 암송</h4>
+      <img src="" alt="이달의 암송 이미지" class="lyrics-image" id="lyrics-image" />
+    </div>
+
+    <!-- 큰 이미지 보기 위한 팝업 -->
+    <div id="imageModal" class="image-modal">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content" id="modalImage" src="" alt="모달 이미지">
+    </div>
+
+  </section>
     
 
   

@@ -349,3 +349,99 @@ openProfileBtn.addEventListener("click", () => {
   hideAllSections();
   profileSection.classList.add("active");
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const database = firebase.database();
+
+  // 각 요소 가져오기
+  const announcementList = document.getElementById("announcement-list");
+  const youtubeWrapper = document.querySelector(".youtube-wrapper iframe");
+  const prayerImage = document.querySelector(".prayer-image");
+  const lyricsImage = document.querySelector(".lyrics-image");
+
+  // Firebase에서 공지사항 불러오기
+  database.ref("announcements/announcement").once("value")
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const announcementContent = snapshot.val().content;
+        const timestamp = snapshot.val().timestamp;
+
+        announcementList.innerHTML = `<p>${announcementContent}</p><p style="color: gray; font-size: 0.8rem;"> 게시 일 ${new Date(timestamp).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>`;
+      }
+    })
+    .catch(error => {
+      console.error("공지사항 불러오기 오류:", error);
+    });
+
+  // 유튜브 링크 불러오기
+  database.ref("announcements/youtubeLink").once("value")
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const youtubeLink = snapshot.val();
+        youtubeWrapper.src = `https://www.youtube.com/embed/${getYouTubeId(youtubeLink)}`;
+      }
+    })
+    .catch(error => {
+      console.error("유튜브 링크 불러오기 오류:", error);
+    });
+
+  // 삶에서 하는 기도 이미지 불러오기
+  database.ref("announcements/prayerImage").once("value")
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const imageUrl = snapshot.val();
+        prayerImage.src = imageUrl;
+      }
+    })
+    .catch(error => {
+      console.error("삶에서 하는 기도 이미지 불러오기 오류:", error);
+    });
+
+  // 이달의 암송 이미지 불러오기
+  database.ref("announcements/lyricsImage").once("value")
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const imageUrl = snapshot.val();
+        lyricsImage.src = imageUrl;
+      }
+    })
+    .catch(error => {
+      console.error("이달의 암송 이미지 불러오기 오류:", error);
+    });
+
+  // 유튜브 링크에서 ID 추출하는 함수
+  function getYouTubeId(url) {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/\S+\/|\S*\?v=|\S*\/v\/)|youtu\.be\/)([\w-]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : "";
+  }
+  
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const images = document.querySelectorAll(".prayer-image, .lyrics-image");
+  const closeBtn = document.getElementsByClassName("close-modal")[0];
+
+  // 이미지 클릭 시 모달 열기
+  images.forEach(image => {
+    image.addEventListener("click", function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;  // 클릭한 이미지의 src를 모달 이미지에 설정
+    });
+  });
+
+  // 모달 닫기
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // 모달 바깥 영역 클릭 시 모달 닫기
+  window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+});
+

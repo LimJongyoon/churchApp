@@ -22,14 +22,33 @@
         <input type="text" id="youtube-link" placeholder="유튜브 링크" />
         <button id="post-youtube">이달의 암송송 🎵 등록</button>
       </form>
+
       <form class="announcement-form">
-        <input type="file" id="prayer-image" accept="image/*" capture="environment" />
-        <button id="post-prayer">삶에서하는 기도 사진 등록</button>
+        <label for="prayer-image">삶에서 하는 기도 사진:</label>
+        <label for="prayer-image" class="custom-file-upload">
+          📂 사진 업로드
+        </label>
+        <input type="file" id="prayer-image" accept="image/*" capture="environment" style="display: none;" />        
+        <div class="upload-info" id="prayer-upload-info">
+          <p id="prayer-progress" style="color: rgb(0, 0, 0); font-weight: bold; margin: 5px 0;"></p>
+          <div id="prayer-preview" style="margin-top: 10px;"></div>
+        </div>
+        <button id="post-prayer">삶에서 하는 기도 사진 등록</button>
       </form>
+      
       <form class="announcement-form">
-        <input type="file" id="lyrics-image" accept="image/*" capture="environment" />
+        <label for="lyrics-image">이달의 암송 이미지:</label>
+        <label for="lyrics-image" class="custom-file-upload">
+          📂 사진 업로드
+        </label>
+        <input type="file" id="lyrics-image" accept="image/*" capture="environment" style="display: none;" /> 
+        <div class="upload-info" id="lyrics-upload-info">
+          <p id="lyrics-progress" style="color: rgb(0, 0, 0); font-weight: bold; margin: 5px 0;"></p>
+          <div id="lyrics-preview" style="margin-top: 10px;"></div>
+        </div>
         <button id="post-lyrics">이달의 암송 등록</button>
-      </form>      
+      </form>
+          
     </section>
 
     <section id="user-stats-section" class="section">
