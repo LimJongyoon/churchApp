@@ -26,10 +26,37 @@ body, button, input, select, textarea {
   }
 
 header {
-  color: rgb(148, 148, 148);
-  padding: 0px;
-  text-align: center;
+    background-color: #e4a4b9;
+    padding: 10px 20px;
+    display: block;
+    align-items: center;
+    justify-content: flex-start; 
+    border-bottom: 4px solid#ffb3c1;
 }
+
+.header-content {
+  display: flex;
+  align-items: baseline;
+}
+
+.logo {
+    width: auto;
+    height: 50px;
+    margin-left: 25%;
+    margin-right: 5px;
+    border-radius: 10px;
+    background-color: #e4a4b9;
+    padding: 5px;
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem; 
+    margin-top: -2px;
+    line-height: 1; 
+    align-items: center; /* 텍스트가 중앙에 위치하도록 설정 */
+}
+
 
 main {
   padding: 20px;
