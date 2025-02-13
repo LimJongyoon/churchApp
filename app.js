@@ -120,6 +120,19 @@ function hideAllSections() {
 
 // 페이지 로드 시 체크리스트 및 사용자 정보 불러오기
 document.addEventListener("DOMContentLoaded", () => {
+  // ✅ 최근 로그인한 사용자 정보를 자동 입력하는 기능 추가
+  let userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+  if (userList.length > 0) {
+    // 최근 로그인한 사용자 정보 가져오기
+    const latestUser = userList[0];
+
+    // 로그인 입력창에 자동 입력
+    document.getElementById("user-name").value = latestUser.name;
+    document.getElementById("user-birth").value = latestUser.birth;
+    document.getElementById("user-department").value = latestUser.department;
+  }
+
   const savedName = localStorage.getItem("userName");
   const savedBirth = localStorage.getItem("userBirth");
   const savedDepartment = localStorage.getItem("userDepartment");
@@ -139,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   taskChecklist.dataset.selectedDay = todayDate;
   updateChecklist(todayDate);
 });
+
 
 // 체크리스트 상태 로컬스토리지에서 불러오기
 function loadChecklistState() {
